@@ -1,0 +1,13 @@
+[project]
+name = "comfyui-ephemeralpeek"
+description = "Peek at any node output without adding preview nodes — Alt+click an output socket for an instant floating preview (cache-aware, zero graph clutter)"
+version = "0.1.0"
+license = { file = "LICENSE" }
+
+[project.urls]
+Repository = "https://github.com/jeremieLouvaert/ComfyUI-EphemeralPeek"
+
+[tool.comfy]
+PublisherId = "akurate"
+DisplayName = "Ephemeral Peek"
+Icon = ""
