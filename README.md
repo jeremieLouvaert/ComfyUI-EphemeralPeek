@@ -1,12 +1,12 @@
 # ComfyUI-EphemeralPeek
 
-Alt+click any output socket on any node and a floating preview appears. Not just the sockets already wired to a Preview or Save node: any socket, on any node, whether or not anything downstream ever looks at it. It is the Blender geometry-nodes viewer idiom (hold a modifier, click a socket, see the data) transplanted onto ComfyUI's graph, where the normalized workaround has always been to wire a `PreviewImage` node onto whatever you want to inspect and delete it again afterward. This tool skips that whole ritual: click, look, move on. Your saved workflow never grows an extra node just because you were curious.
+Alt+click any output socket on any node and a floating preview appears. That works on any socket on any node, including ones that aren't wired to a Preview or Save node and ones nothing downstream ever reads. It is the Blender geometry-nodes viewer idiom (hold a modifier, click a socket, see the data) transplanted onto ComfyUI's graph, where the normalized workaround has always been to wire a `PreviewImage` node onto whatever you want to inspect and delete it again afterward. This tool skips that whole ritual: click, look, move on. Your saved workflow never grows an extra node just because you were curious.
 
 ## How it works
 
 Alt+click hit-tests the socket you clicked, serializes the current graph with `graphToPrompt`, injects one temporary preview node wired to that socket, and submits it as a `partial_execution_targets` request scoped to just that temporary node. The server's own cache does the rest: if the branch feeding your socket already ran with the same inputs, the injected node is the only thing that executes and the result comes back in tens of milliseconds. If the branch is cold or its inputs changed, the server computes its ancestors first, honestly, before the preview appears.
 
-Be precise about what "zero clutter" means: your saved workflow file, your undo history, and the canvas are never touched. Nothing is written to disk or to graph state. But under the hood a real prompt is submitted and a real (if minimal) execution happens on every peek. This is not a static readout of cached data, it is a live, transient computation that happens to be instant when the cache lets it be.
+Be precise about what "zero clutter" means: your saved workflow file, your undo history, and the canvas are never touched. Nothing is written to disk or to graph state. But under the hood a real prompt is submitted and a real (if minimal) execution happens on every peek, a live computation that's only instant when the cache already has the answer.
 
 ## Peek vs core Partial Execution vs wired preview nodes
 
