@@ -1,5 +1,7 @@
 # ComfyUI-EphemeralPeek
 
+![ComfyUI-EphemeralPeek](assets/hero.jpg)
+
 Alt+click any output socket on any node and a floating preview appears. That works on any socket on any node, including ones that aren't wired to a Preview or Save node and ones nothing downstream ever reads. It is the Blender geometry-nodes viewer idiom (hold a modifier, click a socket, see the data) transplanted onto ComfyUI's graph, where the normalized workaround has always been to wire a `PreviewImage` node onto whatever you want to inspect and delete it again afterward. This tool skips that whole ritual: click, look, move on. Your saved workflow never grows an extra node just because you were curious.
 
 ## How it works
